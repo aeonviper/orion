@@ -21,7 +21,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
@@ -30,11 +29,13 @@ import org.apache.commons.fileupload.servlet.FileCleanerCleanup;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.FileCleaningTracker;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import orion.annotation.Cookie;
 import orion.annotation.Request;
 import orion.annotation.Response;
 import orion.annotation.Session;
-import orion.configuration.Configuration;
 import orion.controller.Attachment;
 import orion.core.BeanUtility;
 import orion.core.Constant;
@@ -44,9 +45,6 @@ import orion.navigation.Handle;
 import orion.navigation.MethodParameter;
 import orion.navigation.Navigation;
 import orion.view.View;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 public class ApplicationFilter implements Filter {
 
@@ -297,6 +295,23 @@ public class ApplicationFilter implements Filter {
 	private Object evaluate(MethodParameter parameter, Map<String, String[]> valueMap, Map<String, Object> bodyMap, HttpServletRequest request, HttpServletResponse response) {
 		Object object = null;
 		if (parameter.getAnnotationType() == orion.annotation.Parameter.class) {
+			if (bodyMap != null) {
+				Object value = bodyMap.get(parameter.getName());
+				if (value != null) {
+					if (parameter.isList()) {
+						if (value instanceof List) {
+							List list = new ArrayList<>();
+							for (Object o : (List) value) {
+								list.add(gson.fromJson(gson.toJson(o), parameter.getType()));
+							}
+							object = list;
+						}
+					} else {
+						object = gson.fromJson(gson.toJson(value), parameter.getType());
+					}
+				}
+			}
+			
 			String name = parameter.getName();
 			String[] valueArray = valueMap.get(name);
 			if (valueArray != null) {
@@ -327,23 +342,6 @@ public class ApplicationFilter implements Filter {
 						BeanUtility.instance().populate(object, beanValueMap);
 					} catch (IllegalAccessException | InvocationTargetException e) {
 						e.printStackTrace();
-					}
-				}
-			}
-		} else if (parameter.getAnnotationType() == orion.annotation.Body.class) {
-			if (bodyMap != null) {
-				Object value = bodyMap.get(parameter.getName());
-				if (value != null) {
-					if (parameter.isList()) {
-						if (value instanceof List) {
-							List list = new ArrayList<>();
-							for (Object o : (List) value) {
-								list.add(gson.fromJson(gson.toJson(o), parameter.getType()));
-							}
-							object = list;
-						}
-					} else {
-						object = gson.fromJson(gson.toJson(value), parameter.getType());
 					}
 				}
 			}

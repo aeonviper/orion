@@ -190,10 +190,6 @@ public class Navigation {
 											methodParameter.setName(((orion.annotation.Parameter) parameterAnnotation).value());
 											methodParameter.setAnnotationType(orion.annotation.Parameter.class);
 											break;
-										} else if (parameterAnnotation instanceof orion.annotation.Body) {
-											methodParameter.setName(((orion.annotation.Body) parameterAnnotation).value());
-											methodParameter.setAnnotationType(orion.annotation.Body.class);
-											break;
 										} else if (parameterAnnotation instanceof orion.annotation.Request) {
 											methodParameter.setName(((orion.annotation.Request) parameterAnnotation).value());
 											methodParameter.setAnnotationType(orion.annotation.Request.class);

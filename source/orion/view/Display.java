@@ -2,6 +2,8 @@ package orion.view;
 
 import java.lang.reflect.InvocationTargetException;
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
+import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.Collection;
@@ -13,7 +15,7 @@ import orion.core.Utility;
 
 public class Display {
 
-	public static final ZoneOffset zoneOffset = ZoneOffset.ofHours(7);
+	public static final ZoneOffset zoneOffset = (OffsetDateTime.now(ZoneId.systemDefault())).getOffset();
 	public static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("d MMMM yyyy h:mm a");
 
 	private enum DisplayType {

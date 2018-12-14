@@ -27,7 +27,7 @@ public class Utility {
 		DecimalFormatSymbols decimalFormatSymbols = decimalFormat.getDecimalFormatSymbols();
 		decimalFormatSymbols.setGroupingSeparator('.');
 		decimalFormatSymbols.setDecimalSeparator(',');
-		decimalFormatSymbols.setCurrencySymbol("Rp ");
+		decimalFormatSymbols.setCurrencySymbol("$ ");
 		decimalFormat.setDecimalFormatSymbols(decimalFormatSymbols);
 		numberFormatCurrency = decimalFormat;
 	}
