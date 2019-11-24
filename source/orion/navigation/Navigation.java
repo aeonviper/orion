@@ -1,7 +1,6 @@
 package orion.navigation;
 
 import java.lang.annotation.Annotation;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 import java.util.ArrayList;
@@ -22,8 +21,8 @@ import orion.annotation.Request;
 import orion.annotation.Response;
 import orion.annotation.Session;
 import orion.core.Constant;
-import orion.view.View;
 import orion.core.Utility;
+import orion.view.View;
 
 public class Navigation {
 

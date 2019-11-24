@@ -1,7 +1,5 @@
 package orion.navigation;
 
-import java.lang.annotation.Annotation;
-
 public class MethodParameter {
 
 	private Class annotationType;

@@ -14,12 +14,15 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonParser;
 
+import orion.filter.GsonEnumTypeAdapterFactory;
+
 public class Utility {
 
-	public static final Gson gson = new Gson();
+	public static final Gson gson = new GsonBuilder().registerTypeAdapterFactory(new GsonEnumTypeAdapterFactory()).create();
 	public static final NumberFormat numberFormatCurrency;
 
 	static {

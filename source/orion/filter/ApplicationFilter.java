@@ -203,7 +203,7 @@ public class ApplicationFilter implements Filter {
 						FileItem fileItem = fileItemIterator.next();
 						if (fileItem.isFormField()) {
 							String name = fileItem.getFieldName();
-							String value = fileItem.getString();
+							String value = fileItem.getString(characterEncoding);
 
 							List<String> valueList = fileItemMap.get(name);
 							if (valueList != null) {
