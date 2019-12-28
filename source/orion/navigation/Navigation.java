@@ -27,7 +27,6 @@ import orion.view.View;
 public class Navigation {
 
 	public static final Pattern listParameterizedTypePatterm = Pattern.compile("^java.util.List<(.+)>$");
-	// private static Configuration[] configurationArray = null;
 	private static Map<String, List<Configuration>> configurationMap = new HashMap<>();
 
 	private static void put(Map<String, List<Configuration>> configurationMap, String key, Configuration configuration) {

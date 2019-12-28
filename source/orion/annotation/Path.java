@@ -11,6 +11,8 @@ import java.lang.annotation.Target;
 @Repeatable(PathSet.class)
 public @interface Path {
 	String value() default "";
+
 	String name() default "";
+
 	String method() default "";
 }
