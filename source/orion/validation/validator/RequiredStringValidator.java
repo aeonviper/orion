@@ -1,8 +1,8 @@
 package orion.validation.validator;
 
 import orion.controller.Notification;
-import orion.validation.field.RequiredStringField;
 import orion.core.Utility;
+import orion.validation.field.RequiredStringField;
 
 public class RequiredStringValidator {
 

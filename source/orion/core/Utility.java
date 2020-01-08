@@ -89,10 +89,4 @@ public class Utility extends common.Utility {
 		return request.getRequestURI().substring(request.getContextPath().length());
 	}
 
-	public static void slurp(List<String> logList, Exception e) {
-		for (StackTraceElement element : e.getStackTrace()) {
-			logList.add(element.toString());
-		}
-	}
-
 }

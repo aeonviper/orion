@@ -4,8 +4,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import orion.controller.Notification;
-import orion.validation.field.RegexField;
 import orion.core.Utility;
+import orion.validation.field.RegexField;
 
 public class RegexValidator {
 
