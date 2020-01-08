@@ -20,7 +20,7 @@ import com.google.gson.JsonParser;
 
 import orion.filter.GsonEnumTypeAdapterFactory;
 
-public class Utility {
+public class Utility extends common.Utility {
 
 	public static final Gson gson = new GsonBuilder().registerTypeAdapterFactory(new GsonEnumTypeAdapterFactory()).create();
 	public static final NumberFormat numberFormatCurrency;
@@ -34,7 +34,7 @@ public class Utility {
 		decimalFormat.setDecimalFormatSymbols(decimalFormatSymbols);
 		numberFormatCurrency = decimalFormat;
 	}
-	
+
 	public static List<String> readFileResource(String filename) {
 		InputStreamReader inputStreamReader = null;
 		BufferedReader reader = null;
@@ -84,18 +84,11 @@ public class Utility {
 		}
 		return array;
 	}
-	
+
 	public static String getPath(HttpServletRequest request) {
 		return request.getRequestURI().substring(request.getContextPath().length());
 	}
-	
-	public static String stripText(String str) {
-		if (str == null || str.length() == 0) {
-			return str;
-		}
-		return str.trim();
-	}
-	
+
 	public static void slurp(List<String> logList, Exception e) {
 		for (StackTraceElement element : e.getStackTrace()) {
 			logList.add(element.toString());
