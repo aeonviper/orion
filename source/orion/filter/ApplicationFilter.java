@@ -37,14 +37,15 @@ import orion.annotation.Request;
 import orion.annotation.Response;
 import orion.annotation.Session;
 import orion.controller.Attachment;
-import orion.core.BeanUtility;
 import orion.core.Constant;
-import orion.core.Core;
 import orion.core.Utility;
 import orion.navigation.Handle;
 import orion.navigation.MethodParameter;
 import orion.navigation.Navigation;
 import orion.view.View;
+
+import common.BeanUtility;
+import common.Core;
 
 public class ApplicationFilter implements Filter {
 
@@ -311,7 +312,7 @@ public class ApplicationFilter implements Filter {
 					}
 				}
 			}
-			
+
 			String name = parameter.getName();
 			String[] valueArray = valueMap.get(name);
 			if (valueArray != null) {
