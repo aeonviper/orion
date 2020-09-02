@@ -6,7 +6,7 @@ import java.util.Map;
 public class View {
 
 	public enum Type {
-		FORWARD, REDIRECT, JSON;
+		FORWARD, REDIRECT, JSON, JSON_STRING;
 	}
 
 	private Object value;
