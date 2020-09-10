@@ -6,12 +6,24 @@ import java.util.Map;
 public class View {
 
 	public enum Type {
-		FORWARD, REDIRECT, JSON, JSON_STRING;
+		FORWARD, REDIRECT, JSON, JSON_TEXT, TEXT_HTML, TEXT_PLAIN, CUSTOM;
 	}
 
 	private Object value;
-	private Type type;
+	private Type type = Type.CUSTOM;
 	private Integer statusCode;
+	private String contentType;
+
+	public View(String contentType, Integer statusCode, Object value) {
+		this.contentType = contentType;
+		this.value = value;
+		this.statusCode = statusCode;
+	}
+
+	public View(String contentType, Object value) {
+		this.contentType = contentType;
+		this.value = value;
+	}
 
 	public View(Type type, Integer statusCode, Object value) {
 		this.type = type;
@@ -58,6 +70,14 @@ public class View {
 
 	public Integer getStatusCode() {
 		return statusCode;
+	}
+
+	public String getContentType() {
+		return contentType;
+	}
+
+	public void setContentType(String contentType) {
+		this.contentType = contentType;
 	}
 
 }

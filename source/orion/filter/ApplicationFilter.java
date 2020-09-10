@@ -285,9 +285,24 @@ public class ApplicationFilter implements Filter {
 					} else {
 						pw.println(gson.toJson(view.getValue()));
 					}
-				} else if (View.Type.JSON_STRING == view.getType()) {
+				} else if (View.Type.JSON_TEXT == view.getType()) {
 					response.setCharacterEncoding(characterEncoding);
 					response.setContentType("application/json");
+					PrintWriter pw = response.getWriter();
+					pw.print(view.getValue());
+				} else if (View.Type.TEXT_HTML == view.getType()) {
+					response.setCharacterEncoding(characterEncoding);
+					response.setContentType("text/html");
+					PrintWriter pw = response.getWriter();
+					pw.print(view.getValue());
+				} else if (View.Type.TEXT_PLAIN == view.getType()) {
+					response.setCharacterEncoding(characterEncoding);
+					response.setContentType("text/plain");
+					PrintWriter pw = response.getWriter();
+					pw.print(view.getValue());
+				} else if (View.Type.CUSTOM == view.getType()) {
+					response.setCharacterEncoding(characterEncoding);
+					response.setContentType(view.getContentType());
 					PrintWriter pw = response.getWriter();
 					pw.print(view.getValue());
 				}
