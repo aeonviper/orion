@@ -22,6 +22,12 @@ public class Attachment {
 		boolean result = false;
 		if (file != null) {
 			try {
+				File parentFile = file.getParentFile();
+				if (parentFile != null) {
+					if (!parentFile.exists()) {
+						parentFile.mkdirs();
+					}
+				}
 				fileItem.write(file);
 				result = true;
 			} catch (Exception e) {
