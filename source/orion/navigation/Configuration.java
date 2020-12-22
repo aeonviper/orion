@@ -19,6 +19,10 @@ public class Configuration {
 	private String requestMethod;
 
 	private List<String> pathParameterList = new ArrayList<>();
+	// do not initialize
+	private List<String> allowList;
+	// do not initialize
+	private List<String> denyList;
 
 	public String getControllerName() {
 		return controllerName;
@@ -82,6 +86,22 @@ public class Configuration {
 
 	public void setRequestMethod(String requestMethod) {
 		this.requestMethod = requestMethod;
+	}
+
+	public List<String> getAllowList() {
+		return allowList;
+	}
+
+	public void setAllowList(List<String> allowList) {
+		this.allowList = allowList;
+	}
+
+	public List<String> getDenyList() {
+		return denyList;
+	}
+
+	public void setDenyList(List<String> denyList) {
+		this.denyList = denyList;
 	}
 
 }

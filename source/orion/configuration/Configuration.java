@@ -7,11 +7,10 @@ import orion.core.Utility;
 
 public class Configuration {
 
-	private static String exceptionView = "exceptionView";
-	private static String exceptionViewValue = "/WEB-INF/view/exception.jsp";
+	private static String exceptionView = "error";
+	private static String exceptionViewValue = "/error.jsp";
 
 	private static void configurationFile() {
-
 		List<String> lines = Utility.readFileResource(Constant.applicationConfigurationFile);
 		for (String line : lines) {
 			line = line.trim();
@@ -25,9 +24,7 @@ public class Configuration {
 			if (exceptionView.equals(key) && value != null && !value.trim().isEmpty()) {
 				exceptionViewValue = value;
 			}
-
 		}
-
 	}
 
 	public static String getExceptionViewValue() {

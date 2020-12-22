@@ -100,6 +100,20 @@ public class Navigation {
 		configuration.setPath(path.value());
 		configuration.setPathPattern(Pattern.compile(configuration.getPath()));
 		configuration.setRequestMethod(path.method().isEmpty() ? "any" : path.method().toLowerCase());
+		if (path.allow() != null) {
+			List<String> allowList = new ArrayList<>();
+			for (String q : path.allow()) {
+				allowList.add(q);
+			}
+			configuration.setAllowList(allowList);
+		}
+		if (path.deny() != null) {
+			List<String> denyList = new ArrayList<>();
+			for (String q : path.deny()) {
+				denyList.add(q);
+			}
+			configuration.setDenyList(denyList);
+		}
 		put(configurationMap, configuration.getRequestMethod(), configuration);
 	}
 
@@ -251,7 +265,7 @@ public class Navigation {
 			if (configurationList != null) {
 				for (Configuration configuration : configurationList) {
 					if ((matcher = configuration.getPathPattern().matcher(path)).matches()) {
-						Handle handle = new Handle(configuration.getController(), configuration.getPathMethod());
+						Handle handle = new Handle(configuration.getController(), configuration.getPathMethod(), configuration.getAllowList(), configuration.getDenyList());
 						for (int i = 1; i <= matcher.groupCount(); i++) {
 							handle.getParameterMap().put(configuration.getPathParameterList().get(i - 1), new String[] { matcher.group(i) });
 						}

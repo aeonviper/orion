@@ -15,4 +15,8 @@ public @interface Path {
 	String name() default "";
 
 	String method() default "";
+
+	String[] allow();
+
+	String[] deny();
 }
