@@ -5,20 +5,24 @@ import java.util.List;
 
 public class Notification {
 
+	private String type = "NOTIFICATION";
 	private List<String> noticeList = new ArrayList<>();
 	private List<String> errorList = new ArrayList<>();
 	private List<String> fieldErrorList = new ArrayList<>();
 
-	public void addNotice(String message) {
+	public Notification addNotice(String message) {
 		noticeList.add(message);
+		return this;
 	}
 
-	public void addError(String message) {
+	public Notification addError(String message) {
 		errorList.add(message);
+		return this;
 	}
 
-	public void addFieldError(String name, String message) {
+	public Notification addFieldError(String name, String message) {
 		fieldErrorList.add(message);
+		return this;
 	}
 
 	public List<String> getNoticeList() {
