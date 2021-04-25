@@ -357,7 +357,10 @@ public class ApplicationFilter implements Filter {
 					}
 				}
 				if (!beanValueMap.isEmpty()) {
-					object = Core.getInjector().getInstance(parameter.getType());
+					if (object != null && !(object instanceof List)) {
+					} else {
+						object = Core.getInjector().getInstance(parameter.getType());
+					}
 					try {
 						BeanUtility.instance().populate(object, beanValueMap);
 					} catch (IllegalAccessException | InvocationTargetException e) {
