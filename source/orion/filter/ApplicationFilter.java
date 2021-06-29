@@ -316,6 +316,9 @@ public class ApplicationFilter implements Filter {
 		Object object = null;
 		if (parameter.getAnnotationType() == orion.annotation.Parameter.class) {
 			if (bodyMap != null) {
+				if (parameter.getName().isBlank()) {
+					return bodyMap;
+				}
 				Object value = bodyMap.get(parameter.getName());
 				if (value != null) {
 					if (parameter.isList()) {
