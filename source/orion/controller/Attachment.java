@@ -1,6 +1,8 @@
 package orion.controller;
 
 import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 
 import org.apache.commons.fileupload.FileItem;
 
@@ -28,7 +30,8 @@ public class Attachment {
 						parentFile.mkdirs();
 					}
 				}
-				fileItem.write(file);
+				// fileItem.write(file);
+				Files.copy(fileItem.getInputStream(), file.toPath(), StandardCopyOption.REPLACE_EXISTING);
 				result = true;
 			} catch (Exception e) {
 				e.printStackTrace();
