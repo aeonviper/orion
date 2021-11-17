@@ -131,10 +131,13 @@ public class ApplicationFilter implements Filter {
 						String name = annotation.value();
 						String value = null;
 						if (name != null && !name.isEmpty()) {
-							for (javax.servlet.http.Cookie cookie : request.getCookies()) {
-								if (name.equals(cookie.getName())) {
-									// more than 1 value ?
-									value = cookie.getValue();
+							javax.servlet.http.Cookie[] cookieArray = request.getCookies();
+							if (cookieArray != null) {
+								for (javax.servlet.http.Cookie cookie : cookieArray) {
+									if (name.equals(cookie.getName())) {
+										// more than 1 value ?
+										value = cookie.getValue();
+									}
 								}
 							}
 						}
