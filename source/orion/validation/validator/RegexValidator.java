@@ -21,12 +21,12 @@ public class RegexValidator {
 					notification.addFieldError(field.getName(), field.getMessage());
 					return false;
 				}
-				break;
+				continue;
 			}
 
 			String regex = field.getRegex();
 			if (regex == null) {
-				break;
+				continue;
 			}
 
 			String value = (String) field.getValue();
@@ -40,7 +40,7 @@ public class RegexValidator {
 					notification.addFieldError(field.getName(), field.getMessage());
 					return false;
 				}
-				break;
+				continue;
 			}
 
 			Pattern pattern;

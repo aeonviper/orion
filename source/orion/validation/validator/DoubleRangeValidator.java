@@ -23,7 +23,7 @@ public class DoubleRangeValidator {
 						return false;
 					}
 				}
-				break;
+				continue;
 			}
 
 			Double value = (Double) field.getValue();

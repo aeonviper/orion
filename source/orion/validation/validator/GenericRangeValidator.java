@@ -29,7 +29,7 @@ public class GenericRangeValidator<T extends Comparable> {
 					notification.addFieldError(field.getName(), field.getMessage());
 					return false;
 				}
-				break;
+				continue;
 			}
 
 			Comparable<T> value = (Comparable<T>) field.getValue();

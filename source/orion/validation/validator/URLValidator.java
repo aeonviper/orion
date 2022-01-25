@@ -20,7 +20,7 @@ public class URLValidator {
 					notification.addFieldError(field.getName(), field.getMessage());
 					return false;
 				}
-				break;
+				continue;
 			}
 
 			String value = (String) field.getValue();
