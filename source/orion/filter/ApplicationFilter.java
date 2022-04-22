@@ -41,6 +41,7 @@ import orion.annotation.Session;
 import orion.controller.Attachment;
 import orion.core.Constant;
 import orion.core.Utility;
+import orion.exception.ValidationException;
 import orion.navigation.Handle;
 import orion.navigation.MethodParameter;
 import orion.navigation.Navigation;
@@ -267,7 +268,11 @@ public class ApplicationFilter implements Filter {
 				if (throwable instanceof InvocationTargetException) {
 					throwable = ((InvocationTargetException) throwable).getTargetException();
 				}
-				throw new RuntimeException(throwable);
+				if (throwable instanceof ValidationException) {
+					view = new View(View.Type.JSON, HttpServletResponse.SC_BAD_REQUEST, ((ValidationException) throwable).getNotification());
+				} else {
+					throw new RuntimeException(throwable);
+				}
 			}
 
 			if (view != null) {
