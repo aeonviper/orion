@@ -17,12 +17,13 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonParser;
+import com.google.gson.ToNumberPolicy;
 
 import orion.filter.GsonEnumTypeAdapterFactory;
 
 public class Utility extends common.Utility {
 
-	public static final Gson gson = new GsonBuilder().registerTypeAdapterFactory(new GsonEnumTypeAdapterFactory()).create();
+	public static final Gson gson = new GsonBuilder().setObjectToNumberStrategy(ToNumberPolicy.BIG_DECIMAL).registerTypeAdapterFactory(new GsonEnumTypeAdapterFactory()).create();
 	public static final NumberFormat numberFormatCurrency;
 
 	static {

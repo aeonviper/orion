@@ -1,26 +1,22 @@
 package orion.exception;
 
-import orion.controller.Notification;
-
 public class ValidationException extends RuntimeException {
 
-	private static final long serialVersionUID = 8008351699357781797L;
-
-	protected Notification notification;
+	protected String message;
 
 	public ValidationException() {
 	}
 
-	public ValidationException(Notification notification) {
-		this.notification = notification;
+	public ValidationException(String message) {
+		this.message = message;
 	}
 
-	public Notification getNotification() {
-		return notification;
+	public String getMessage() {
+		return message;
 	}
 
-	public void setNotification(Notification notification) {
-		this.notification = notification;
+	public void setMessage(String message) {
+		this.message = message;
 	}
 
 }

@@ -31,6 +31,7 @@ import org.apache.commons.io.FileCleaningTracker;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.ToNumberPolicy;
 
 import common.BeanUtility;
 import common.Core;
@@ -42,6 +43,7 @@ import orion.controller.Attachment;
 import orion.core.Constant;
 import orion.core.Utility;
 import orion.exception.ValidationException;
+import orion.exception.ValidationNotificationException;
 import orion.navigation.Handle;
 import orion.navigation.MethodParameter;
 import orion.navigation.Navigation;
@@ -50,8 +52,8 @@ import orion.view.View;
 public class ApplicationFilter implements Filter {
 
 	protected String characterEncoding = "UTF-8";
-	protected Gson gson = new Gson();
-	protected Gson gsonEnumBean = new GsonBuilder().registerTypeAdapterFactory(new GsonEnumTypeAdapterFactory()).create();
+	protected Gson gson = new GsonBuilder().setObjectToNumberStrategy(ToNumberPolicy.BIG_DECIMAL).create();
+	protected Gson gsonEnumBean = new GsonBuilder().setObjectToNumberStrategy(ToNumberPolicy.BIG_DECIMAL).registerTypeAdapterFactory(new GsonEnumTypeAdapterFactory()).create();
 
 	public void init(FilterConfig config) throws ServletException {
 		String characterEncoding = config.getInitParameter("characterEncoding");
@@ -268,8 +270,10 @@ public class ApplicationFilter implements Filter {
 				if (throwable instanceof InvocationTargetException) {
 					throwable = ((InvocationTargetException) throwable).getTargetException();
 				}
-				if (throwable instanceof ValidationException) {
-					view = new View(View.Type.JSON, HttpServletResponse.SC_BAD_REQUEST, ((ValidationException) throwable).getNotification());
+				if (throwable instanceof ValidationNotificationException) {
+					view = new View(View.Type.JSON, HttpServletResponse.SC_BAD_REQUEST, ((ValidationNotificationException) throwable).getNotification());
+				} else if (throwable instanceof ValidationException) {
+					view = new View(View.Type.JSON, HttpServletResponse.SC_BAD_REQUEST, ((ValidationException) throwable).getMessage());
 				} else {
 					throw new RuntimeException(throwable);
 				}
